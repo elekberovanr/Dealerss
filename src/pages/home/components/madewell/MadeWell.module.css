@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.madewellall {
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.image {
+    width: 40%;
+    height: 90vh;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+.madewell{
+    width: 40%; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.top{
+    font-size: 70px;
+}
+
+.span{
+    font-size: 20px;
+}
+
+.price{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 30px;
+}
+
+.pricebefore{
+    color: gray;
+    text-decoration: line-through;
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.buttonone{
+    padding: 15px 25px;
+    border: 1px solid rgb(78, 78, 255);
+    color: rgb(78, 78, 255);
+
+}
+
+.buttontwo{
+    padding: 15px 25px;
+    background-color: rgb(78, 78, 255);
+    border: none;
+    color: white;
+}
+
+@media (max-width: 800px){
+    .madewellall{
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .top{
+        font-size: 50px;
+    }
+
+    .image{
+        width: 60%;
+    }
+
+    .madewell{
+        width: 60%;
+    }
+
+}

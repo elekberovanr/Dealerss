@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.jacketall {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 60px;
+    text-align: center;
+}
+
+.jacket{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+}
+.image {
+    width: 40%;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+.top{
+    font-size: 80px;
+    font-size: 700;
+}
+
+.span{
+    font-size: 20px;
+}
+
+
+.buttons{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.buttonone{
+    padding: 15px 25px;
+    color: rgb(255, 255, 255);
+    background-color: black;
+
+}
+
+@media (max-width: 800px){
+    .jacketall{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .top{
+        font-size: 50px;
+    }
+
+    .image{
+        width: 70%;
+    }
+
+    .jacket{
+        width: 60%;
+    }
+
+}
