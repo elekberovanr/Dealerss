@@ -1,20 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AdminPanel.module.css";
-import ProductCard from "../cards/ProductCard";
 import {
-  deleteProduct,
+  deleteProductThunk,
   getProductsThunk,
   postProductThunk,
+  updateProductThunk,
 } from "../../redux/reducers/productSlice";
 import { useFormik } from "formik";
+import AdminCard from "../cards/admin/AdminCard";
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.products.items);
   const loading = useSelector((state) => state.products.loading);
   const error = useSelector((state) => state.products.error);
-  console.log(items);
+
+  const [editItemId, setEditItemId] = useState();
+  
 
   const formik = useFormik({
     initialValues: {
@@ -22,18 +25,32 @@ const AdminPanel = () => {
       description: "",
     },
     onSubmit: (data) => {
-      console.log(data);
-      dispatch(postProductThunk(data));
+      if (editItemId) {
+        dispatch(updateProductThunk({ id: editItemId, updatedData: data }));
+        setEditItemId();
+      } else {
+        dispatch(postProductThunk(data));
+      }
+      formik.resetForm(); 
     },
   });
 
   useEffect(() => {
     dispatch(getProductsThunk());
-  }, []);
+  }, [dispatch]);
 
   const handleDelete = (productId) => {
-    dispatch(deleteProduct(productId));
+    dispatch(deleteProductThunk(productId));
   };
+
+  const handleEdit = (item) => {
+    setEditItemId(item.id);
+    formik.setValues({
+      name: item.name,
+      description: item.description,
+    });
+  };
+  
 
   if (loading) return <span>Yüklənir...</span>;
   if (error) return <span>Xəta: {error}</span>;
@@ -55,29 +72,26 @@ const AdminPanel = () => {
         </div>
         <div className={styles.group}>
           <input
-            type="number"
+            type="text"
             name="description"
             value={formik.values.description}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="Qiymət"
+            placeholder="Açıqlama"
           />
         </div>
-        <button type="submit">Əlavə Et</button>
+        <button type="submit" className={styles.button}>Əlavə Et</button>
       </form>
 
-      <div>
-        {items && items.length > 0 ? (
-          items.map((item) => (
-            <ProductCard
-              key={item.id}
-              item={item}
-              onDelete={() => handleDelete(item.id)}
-            />
-          ))
-        ) : (
-          <p>Heç bir məhsul tapılmadı.</p>
-        )}
+      <div className={styles.all}>
+        {items && items.map((item) => (
+          <AdminCard
+            key={item.id}
+            item={item}
+            onDelete={() => handleDelete(item.id)}
+            onEdit={() => handleEdit(item)}
+          />
+        ))}
       </div>
     </div>
   );

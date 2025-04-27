@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./Collection.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import ProductCard from "../../../../components/cards/ProductCard";
+import ProductCard from "../../../../components/cards/product/ProductCard";
 import { getProductsThunk } from "../../../../redux/reducers/productSlice";
 
 const Collection = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.products.items);
+  const items = useSelector((state) => state.products.products);
 
   useEffect(() => {
     dispatch(getProductsThunk());

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "../../cards/ProductCard";
+import ProductCard from "../../cards/product/ProductCard";
 import styles from "./Products.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {getProductThunk } from "../../../redux/reducers/productSlice";
